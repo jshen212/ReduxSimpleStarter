@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import SearchBar from "./components/search_bar.js";
+import VideoDetail from "./components/video_detail"
+import VideoList from "./components/video_list";
+
 import YTSearch from "youtube-api-search";
 const API_KEY = "AIzaSyCXN3QDrz6woo449vlRXK0kuAqVY5bKslo";
-import VideoList from "./components/video_list";
+
 
 // create a new component
 // this component should produce some html
@@ -13,19 +16,18 @@ class App extends Component {
 
     this.state = { videos: [] };
 
-    YTSearch({key: API_KEY, term: 'surfboard'}, (videos) => {
+    YTSearch({key: API_KEY, term: 'surfboards'}, (videos) => {
       this.setState({ videos });
     });
   }
-
-
 
   render(){
     return (
       <div>
         <SearchBar />
-        <VideoList videos={this.state.videos} />
-      </div>
+        <VideoDetail video={this.state.videos[0]}/>
+          <VideoList videos={this.state.videos} />
+        </div>
     );
   }
 };
